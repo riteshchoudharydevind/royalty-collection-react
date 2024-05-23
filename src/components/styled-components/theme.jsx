@@ -6,8 +6,4 @@ export const theme = {
     red: { normal: "#FF4E4E" },
     white: { normal: "#FFFFFF" },
   },
-  sizes: {
-    mobileWidth: "620px",
-    tabletWidth: "900px",
-  },
 };

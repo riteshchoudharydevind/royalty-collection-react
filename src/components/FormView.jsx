@@ -8,14 +8,13 @@ import {
   InputWrapper,
   ButtonWrapper,
   FormFooter,
-  LinkText,
-  Header,
+  Label,
 } from "./styled-components/common";
 import PageHeader from "./PageHeader";
 
-const DynamicForm = ({ config, title, description }) => {
+const DynamicForm = ({ config }) => {
   const [formData, setFormData] = useState(
-    config.reduce((acc, field) => {
+    config.inputs.reduce((acc, field) => {
       acc[field.name] = "";
       return acc;
     }, {})
@@ -34,7 +33,7 @@ const DynamicForm = ({ config, title, description }) => {
   const validateForm = () => {
     let valid = true;
     const newErrors = {};
-    config.forEach((field) => {
+    config.inputs.forEach((field) => {
       if (field.required && !formData[field.name]) {
         valid = false;
         newErrors[field.name] = `${field.label} is required`;
@@ -59,7 +58,7 @@ const DynamicForm = ({ config, title, description }) => {
   };
 
   const isFormValid = () => {
-    return config.every((field) => {
+    return config.inputs.every((field) => {
       if (
         field.required &&
         (!formData[field.name] || formData[field.name] === "")
@@ -74,12 +73,12 @@ const DynamicForm = ({ config, title, description }) => {
 
   return (
     <FormWrapper>
-      <PageHeader title={title} description={description} />
+      <PageHeader title={config.title} description={config.description} />
       <form onSubmit={handleSubmit}>
-        {config.map((field, index) => (
+        {config.inputs.map((field, index) => (
           <FormContainer key={index}>
             <InputWrapper key={index}>
-              <label htmlFor={field.name}>{field.label}</label>
+              <Label htmlFor={field.name}>{field.label}</Label>
               <TextInput
                 id={field.name}
                 name={field.name}
@@ -99,21 +98,11 @@ const DynamicForm = ({ config, title, description }) => {
         ))}
         <ButtonWrapper>
           <Button type="submit" disabled={!isFormValid()}>
-            Sign Up
+            {config.submitButton.text}
           </Button>
         </ButtonWrapper>
       </form>
-      <FormFooter>
-        By clicking “Start Application“, I agree to Mercury’sx
-        <LinkText href="">Terms of Use</LinkText>,
-        <LinkText href="">Privacy Policy</LinkText>and to receive electronic
-        communication about my accounts and services per
-        <LinkText href="">
-          Mercury’s Electronic Communications Agreement
-        </LinkText>
-        , and acknowledge receipt of
-        <LinkText href="">Mercury’s USA PATRIOT Act disclosure.</LinkText>
-      </FormFooter>
+      {config.footerContent && <FormFooter>{config.footerContent}</FormFooter>}
     </FormWrapper>
   );
 };

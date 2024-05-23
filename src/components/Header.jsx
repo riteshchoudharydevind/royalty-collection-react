@@ -1,20 +1,15 @@
 import React from "react";
-import {
-  ChevronRight,
-  Logo,
-  NavText,
-  Navbar,
-} from "./styled-components/common";
-import { navbarTitle } from "../utils/input_fields/navbartext";
+import { Logo, NavText, Navbar } from "./styled-components/common";
+import ChevronRightIcon from "../assets/images/Arrow.svg";
 
 const Header = () => {
   return (
     <>
       <Navbar>
-        <Logo></Logo>
+        <Logo />
         <NavText>
-          {navbarTitle.title}
-          <ChevronRight />
+          Login
+          <img style={{ height: "14px" }} src={ChevronRightIcon} alt="" />
         </NavText>
       </Navbar>
     </>

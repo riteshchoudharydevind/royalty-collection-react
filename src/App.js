@@ -1,12 +1,16 @@
 import "./App.css";
 import Header from "./components/Header";
+import LeftViewContainer from "./components/LeftViewContainer";
 import Signup from "./views/Signup";
 
 function App() {
   return (
     <>
       <Header />
-      <Signup />
+      <div style={{ display: "flex" }}>
+        <LeftViewContainer />
+        <Signup />
+      </div>
     </>
   );
 }
