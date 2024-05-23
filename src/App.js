@@ -1,7 +1,14 @@
 import "./App.css";
+import Header from "./components/Header";
+import Signup from "./views/Signup";
 
 function App() {
-  return <div className="App"></div>;
+  return (
+    <>
+      <Header />
+      <Signup />
+    </>
+  );
 }
 
 export default App;
